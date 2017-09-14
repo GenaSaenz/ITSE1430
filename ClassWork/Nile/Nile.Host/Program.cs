@@ -35,7 +35,17 @@ namespace Nile.Host
 
         private static void ListProducts()
         {
-            throw new NotImplementedException();
+            //Name $price [Discontinued]
+            //Description
+            //string msg = String.Format("{0}\t\t\t${1}\t\t{2}", productName, productPrice,
+            //    productDiscontinued ? "[Discontinued]" : "");
+            //  Console.WriteLine("{0}\t\t\t${1}\t\t{2}", productName, productPrice,
+            //     productDiscontinued ? "[Discontinued]" : "");
+
+            //Option 3 - Do this way
+            string msg = $"{productName}\t\t\t${productPrice}\t\t{(productDiscontinued ? "[Discontinued]" : "")}";
+            Console.WriteLine(msg);
+            Console.WriteLine(productDescription);
         }
 
         private static void AddProduct()
@@ -46,13 +56,13 @@ namespace Nile.Host
             //Ensure not empty
 
             Console.Write("Enter price (> 0): ");
-            string price = Console.ReadLine().Trim();
+            productPrice = ReadDecimal();
 
             Console.Write("Enter optional description: ");
             productDescription = Console.ReadLine().Trim();
 
             Console.Write("Is it discontinued (Y/N): ");
-            string discontinued = Console.ReadLine().Trim();
+            productDiscontinued = ReadYesNo();
         }
 
         static char GetInput()
@@ -94,6 +104,66 @@ namespace Nile.Host
                 Console.WriteLine("Please choose a valid option");
             };
         }
+
+        /// <summary>
+        /// Reads a decimal from Console.</summary>
+        /// <returns>The decimal value.</returns>
+        static decimal ReadDecimal()
+        {
+            do
+            {
+                string input = Console.ReadLine();
+
+               // decimal result;
+                if (Decimal.TryParse(input, out decimal result))
+                    return result;
+
+                Console.WriteLine("Enter a valid decimal");
+            } while (true);
+        }
+
+        static string ReadString(string errorMessage, bool allowEmpty)
+        {
+            //if (errorMessage == null)
+            //errorMessage = "Enter a valid string";
+            //else
+            //  errorMessage = errorMessage.Trim(),
+            //Null coalesce
+            errorMessage = errorMessage ?? "Enter a valid string";
+
+            //Null conditional 
+            errorMessage = errorMessage?.Trim();
+            do
+            {
+                string input = Console.ReadLine();
+                if (String.IsNullOrEmpty(input) && allowEmpty)
+                    return "";
+                else if (!String.IsNullOrEmpty(input))
+                    return input;
+
+                Console.WriteLine(errorMessage);
+                
+            } while (true);
+        }
+
+        static bool ReadYesNo()
+        {
+            do
+            {
+                string input = Console.ReadLine();
+
+                if (!String.IsNullOrEmpty(input))
+                {
+                    switch (Char.ToUpper(input[0]))
+                    {
+                        case 'Y': return true;
+                        case 'N': return false;
+                    };
+                };
+                Console.WriteLine("Enter either Y or N");
+            } while (true);
+        }
+
 
         //Product
         static string productName;
