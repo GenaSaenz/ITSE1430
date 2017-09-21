@@ -80,9 +80,7 @@ namespace Lab1
             movieLength = ReadMovieLength();
 
             Console.Write("Do you own this movie? (Y/N): ");
-            movieOwned = ReadYesNo();
-
-            
+            movieOwned = ReadYesNo();   
         }
 
         private static void RemoveMovie()
