@@ -52,14 +52,13 @@ namespace Lab1
             //Description (optional)
             //Length (optional)
             //Owned (Yes or No)
-            while (true)
-            {
+           
                 string msg = $"{movieTitle}\n{movieDescription}\n{movieLength}\n{(movieOwned ? "[Owned]" : "")}";
                 if (String.IsNullOrEmpty(msg))
                     Console.WriteLine("There are no movies to display.");
                 else if (!String.IsNullOrEmpty(msg))
                     Console.WriteLine(msg);
-            };
+           
         }
 
         private static void AddMovie()
@@ -88,17 +87,13 @@ namespace Lab1
 
         private static void RemoveMovie()
         {
-           // do
-            //{
                 Console.WriteLine("Are you sure you want to delete this movie?");
                 removeMovie = ReadYesNo();
-
-                if (removeMovie == true)
+                string msg = $"{movieTitle}\n{movieDescription}\n{movieLength}\n{(movieOwned ? "[Owned]" : "")}";   
+                if (removeMovie == true && (!String.IsNullOrEmpty(msg)))
                 {
-                    string msg1 = $"{movieTitle}\n${movieDescription}\n{movieLength}\n{(movieOwned ? "[Owned]" : "")}";
-                    msg1.Remove(0);
+                   msg.Remove(0, 3);
                 }
-           // } while (true);
 
                 Console.WriteLine("Your movie has been removed.");
         }
@@ -148,11 +143,9 @@ namespace Lab1
                 while (true)
                 {
                     string input = Console.ReadLine();
-                    if (Int32.TryParse(input, out int result))
-                    {
-                        Console.WriteLine(result);
+                    if (Int32.TryParse(input, out int result) && result >= 0)
                         return input;
-                    } else
+                    else
                         Console.WriteLine("You must enter a value >= 0");
                 
                 };
@@ -204,5 +197,6 @@ namespace Lab1
         static bool allowEmpty;
         static string errorMessage;
         private static bool removeMovie;
+        static string msg;
     }
 }
