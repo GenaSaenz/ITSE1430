@@ -13,7 +13,7 @@ namespace Nile
     /// </remarks>
     public class Product
     {
-        public readonly Product None = new Product();
+        //public readonly Product None = new Product();
 
         /// <summary>Gets or Sets the name.</summary>
         /// <value>Never returns null.</value>
