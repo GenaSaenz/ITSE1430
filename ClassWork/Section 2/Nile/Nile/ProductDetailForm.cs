@@ -12,9 +12,38 @@ namespace Nile
 {
     public partial class ProductDetailForm : Form
     {
-        public ProductDetailForm()
+        //Constructor Chaining
+        #region Construction  
+        public ProductDetailForm() //: base()
         {
             InitializeComponent();
+
+        }
+
+        public ProductDetailForm(string title ) : this()
+        {
+            Text = title;
+        }
+
+        public ProductDetailForm( string title, Product product ) : this(title)
+        {
+            Product = product;
+        }
+        #endregion
+
+
+        protected override void OnLoad( EventArgs e )
+        {
+            base.OnLoad(e);
+        
+        
+            if (Product != null)
+            {
+                _txtName.Text = Product.Name;
+                _txtDescription.Text = Product.Description;
+                _txtPrice.Text = Product.Price.ToString();
+                _ckbxDiscontinued.Checked = Product.IsDiscontinued;
+            };
         }
 
         /// <summary>Gets or Sets the product being shown.</summary>
@@ -26,6 +55,10 @@ namespace Nile
             Close();
         }
 
+        private void ShowError (string message, string title)
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         private void OnSave( object sender, EventArgs e )
         {
             var product = new Product();
@@ -34,7 +67,14 @@ namespace Nile
             product.Price = GetPrice();
             product.IsDiscontinued = _ckbxDiscontinued.Checked;
 
-            //TODO: Add validation
+            //Add validation
+            var error = product.Validate();
+            if (!String.IsNullOrEmpty(error))
+            {
+                //Show the error
+                ShowError(error, "Validation Error");
+                return;
+            };
 
             Product = product;
             this.DialogResult = DialogResult.OK;
