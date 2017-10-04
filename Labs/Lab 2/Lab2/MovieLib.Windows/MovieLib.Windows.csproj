@@ -79,6 +79,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MovieDetails\MovieDetails.csproj">
+      <Project>{c96e0de6-5e7a-4334-8294-e422d007d5c7}</Project>
+      <Name>MovieDetails</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieLib\MovieLib.csproj">
       <Project>{629dfdc2-41d7-4bf8-b5eb-404ff22a6ce5}</Project>
       <Name>MovieLib</Name>

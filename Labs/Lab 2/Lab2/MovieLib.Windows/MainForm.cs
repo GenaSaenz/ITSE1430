@@ -16,5 +16,30 @@ namespace MovieLib.Windows
         {
             InitializeComponent();
         }
+
+        private void OnFileExit( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnMovieAdd( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnMovieEdit( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnMovieDelete( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnHelpAbout( object sender, EventArgs e )
+        {
+
+        }
     }
 }

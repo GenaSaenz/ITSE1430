@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.titleLabel = new System.Windows.Forms.Label();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
+            this.txtBoxTitle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxDescript = new System.Windows.Forms.TextBox();
+            this.txtBoxDescript = new System.Windows.Forms.TextBox();
             this.labelLength = new System.Windows.Forms.Label();
-            this.textBoxLength = new System.Windows.Forms.TextBox();
+            this.txtBoxLength = new System.Windows.Forms.TextBox();
             this.labelMins = new System.Windows.Forms.Label();
             this.ckBoxOwned = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -50,13 +50,13 @@
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Title";
             // 
-            // textBoxTitle
+            // txtBoxTitle
             // 
-            this.textBoxTitle.AcceptsTab = true;
-            this.textBoxTitle.Location = new System.Drawing.Point(139, 42);
-            this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(425, 20);
-            this.textBoxTitle.TabIndex = 1;
+            this.txtBoxTitle.AcceptsTab = true;
+            this.txtBoxTitle.Location = new System.Drawing.Point(139, 42);
+            this.txtBoxTitle.Name = "txtBoxTitle";
+            this.txtBoxTitle.Size = new System.Drawing.Size(425, 20);
+            this.txtBoxTitle.TabIndex = 1;
             // 
             // label1
             // 
@@ -68,14 +68,14 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Description";
             // 
-            // textBoxDescript
+            // txtBoxDescript
             // 
-            this.textBoxDescript.AcceptsTab = true;
-            this.textBoxDescript.Location = new System.Drawing.Point(139, 68);
-            this.textBoxDescript.Multiline = true;
-            this.textBoxDescript.Name = "textBoxDescript";
-            this.textBoxDescript.Size = new System.Drawing.Size(425, 100);
-            this.textBoxDescript.TabIndex = 3;
+            this.txtBoxDescript.AcceptsTab = true;
+            this.txtBoxDescript.Location = new System.Drawing.Point(139, 68);
+            this.txtBoxDescript.Multiline = true;
+            this.txtBoxDescript.Name = "txtBoxDescript";
+            this.txtBoxDescript.Size = new System.Drawing.Size(425, 100);
+            this.txtBoxDescript.TabIndex = 3;
             // 
             // labelLength
             // 
@@ -87,13 +87,13 @@
             this.labelLength.TabIndex = 4;
             this.labelLength.Text = "Length";
             // 
-            // textBoxLength
+            // txtBoxLength
             // 
-            this.textBoxLength.AcceptsTab = true;
-            this.textBoxLength.Location = new System.Drawing.Point(139, 174);
-            this.textBoxLength.Name = "textBoxLength";
-            this.textBoxLength.Size = new System.Drawing.Size(80, 20);
-            this.textBoxLength.TabIndex = 5;
+            this.txtBoxLength.AcceptsTab = true;
+            this.txtBoxLength.Location = new System.Drawing.Point(139, 174);
+            this.txtBoxLength.Name = "txtBoxLength";
+            this.txtBoxLength.Size = new System.Drawing.Size(80, 20);
+            this.txtBoxLength.TabIndex = 5;
             // 
             // labelMins
             // 
@@ -124,6 +124,7 @@
             this.buttonSave.TabIndex = 8;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.OnSave);
             // 
             // buttonCancel
             // 
@@ -134,8 +135,9 @@
             this.buttonCancel.TabIndex = 9;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.OnCancel);
             // 
-            // movieDetails
+            // MovieDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,13 +146,13 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.ckBoxOwned);
             this.Controls.Add(this.labelMins);
-            this.Controls.Add(this.textBoxLength);
+            this.Controls.Add(this.txtBoxLength);
             this.Controls.Add(this.labelLength);
-            this.Controls.Add(this.textBoxDescript);
+            this.Controls.Add(this.txtBoxDescript);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxTitle);
+            this.Controls.Add(this.txtBoxTitle);
             this.Controls.Add(this.titleLabel);
-            this.Name = "movieDetails";
+            this.Name = "MovieDetails";
             this.Text = "Movie Details";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -160,11 +162,11 @@
         #endregion
 
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.TextBox textBoxTitle;
+        private System.Windows.Forms.TextBox txtBoxTitle;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxDescript;
+        private System.Windows.Forms.TextBox txtBoxDescript;
         private System.Windows.Forms.Label labelLength;
-        private System.Windows.Forms.TextBox textBoxLength;
+        private System.Windows.Forms.TextBox txtBoxLength;
         private System.Windows.Forms.Label labelMins;
         private System.Windows.Forms.CheckBox ckBoxOwned;
         private System.Windows.Forms.Button buttonSave;
