@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Product.cs" />
+    <Compile Include="ProductDatabase.cs" />
     <Compile Include="ProductDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
