@@ -12,23 +12,27 @@ namespace Nile
     {
         public ProductDatabase ()
         {
-            _products[0] = new Product();
-            _products[0].Name = "Bike Rack";
-            _products[0].Price = 250;
+            var product = new Product();
+            product.Name = "Bike Rack";
+            product.Price = 250;
+            Add(product);
 
-            _products[1] = new Product();
-            _products[1].Name = "Samsung Note 7";
-            _products[1].Price = 150;
-            _products[1].IsDiscontinued = true;
+            product = new Product();
+            product.Name = "Samsung Note 7";
+            product.Price = 150;
+            product.IsDiscontinued = true;
+            Add(product);
 
-            _products[2] = new Product();
-            _products[2].Name = "Apple iPhone X";
-            _products[2].Price = 1150;
+            product = new Product();
+            product.Name = "Apple iPhone X";
+            product.Price = 1150;
+            Add(product);
 
-            _products[3] = new Product();
-            _products[3].Name = "Windows Phone";
-            _products[3].Price = 450;
-            _products[3].IsDiscontinued = true;
+            product = new Product();
+            product.Name = "Windows Phone";
+            product.Price = 450;
+            product.IsDiscontinued = true;
+            Add(product);
         }
         /// <summary>
         /// Adds a product.</summary>
@@ -36,18 +40,34 @@ namespace Nile
         /// <returns>The added product.</returns>
         public Product Add (Product product)
         {
+            if (product == null)
+                return null;
+            product.Validate();
+
+            //Emulate database by storing copy
+            var newProduct = CopyProduct(product);
+            _products.Add(newProduct);
+            newProduct.Id = _nextId++;
+
+            return CopyProduct(product);
+
+            //var item = _list[0];
+
             //TODO: Implement Add 
-            return product;
+            //return product;
         }
 
         /// <summary>
         /// Get a specific product.
         /// </summary>
         /// <returns>The product, if it exists.</returns>
-        public Product Get ()
+        public Product Get ( int id )
         {
-            //TODO: Implement Get
-            return null;
+            if (id <= 0)
+                return null;
+
+            var product = FindProduct(id);
+            return (product != null) ? CopyProduct(product) : null;
         }
 
         /// <summary>
@@ -55,22 +75,44 @@ namespace Nile
         /// <returns>The products.</returns>
         public Product[] GetAll ()
         {
-            var items = new Product[_products.Length];
+            var items = new Product[_products.Count];
             var index = 0;
-
             foreach (var product in _products)
-            {
                 items[index++] = CopyProduct(product);
-            };
-            return _products;
+
+            return items;
+            
+            //How many products
+           // var count = 0;
+           // foreach (var product in _products)
+           // {
+            //    if (product != null)
+            //        ++count;
+            //};
+
+           // var items = new Product[count];
+           // var index = 0;
+
+           // foreach (var product in _products)
+           // {
+            //    if (product != null)
+            //    items[index++] = CopyProduct(product);
+           // };
+           // return items;
         }
 
         /// <summary>
         /// Removes the product.</summary>
         /// <param name="product">The product to remove.</param>
-        public void Remove (Product product)
+        public void Remove (int id)
         {
-            //TODO: Implement Remove
+            if (id <= 0)
+                return;
+
+            var product = FindProduct(id);
+            if (product != null)
+                _products.Remove(product);
+                
         }
 
         /// <summary>
@@ -79,8 +121,23 @@ namespace Nile
         /// <returns>The updated product.</returns>
         public Product Update (Product product)
         {
-            //TODO: Implement Update
-            return product;
+            if (product == null)
+                return null;
+            if (!String.IsNullOrEmpty(product.Validate()))
+            return null;
+
+            //Get existing product
+            var existing = FindProduct(product.Id);
+            if (existing == null)
+                return null;
+
+            //Replace
+            _products.Remove(existing);
+            
+            var newProduct = CopyProduct(product);
+            _products.Add(newProduct);
+
+            return CopyProduct(newProduct);
         }
 
         private Product CopyProduct ( Product product)
@@ -89,6 +146,7 @@ namespace Nile
                 return null;
 
             var newProduct = new Product();
+            newProduct.Id = product.Id;
             newProduct.Name = product.Name;
             newProduct.Price = product.Price;
             newProduct.IsDiscontinued = product.IsDiscontinued;
@@ -96,7 +154,18 @@ namespace Nile
             return newProduct;
         }
 
-        private Product[] _products = new Product[100];
+        private Product FindProduct ( int id )
+        {
+            foreach (var product in _products)
+            {
+                if (product.Id == id)
+                    return product;
+            };
 
+        }
+
+        //private Product[] _products = new Product[100];
+        private List<Product> _products = new List<Product>();
+        private int _nextId = 1;
     }
 }

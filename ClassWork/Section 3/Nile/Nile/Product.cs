@@ -13,7 +13,11 @@ namespace Nile
     /// </remarks>
     public class Product
     {
-        //public readonly Product None = new Product();
+        //Cros field initialization
+        public Product ()
+        {
+            //Cross field initialization
+        }
 
         /// <summary>Gets or Sets the name.</summary>
         /// <value>Never returns null.</value>

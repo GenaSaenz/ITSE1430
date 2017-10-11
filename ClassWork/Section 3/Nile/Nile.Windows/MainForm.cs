@@ -13,29 +13,45 @@ namespace Nile.Windows
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
-            var products = _database.GetAll();
+
+            foreach (var product in _database.GetAll())
+            _listProducts.Items.Add(product);
         }
-       // private int FindAvailableElement ()
-       // {
-       //     for (var index = 0; index < _products.Length; ++index)
-       //     {
-       //         if (_products[index] == null)
-       //             return index;
-       //     };
 
-       //     return -1;
-       // }
+        // private int FindAvailableElement ()
+        // {
+        //     for (var index = 0; index < _products.Length; ++index)
+        //     {
+        //         if (_products[index] == null)
+        //             return index;
+        //     };
 
-      //  private int FindFirstProduct()
-       // {
-       //     for (var index = 0; index < _products.Length; ++index)
+        //     return -1;
+        // }
+
+        //  private int FindFirstProduct()
+        // {
+        //     for (var index = 0; index < _products.Length; ++index)
         //    {
         //        if (_products[index] != null)
         //            return index;
         //    };
 
         //    return -1;
-       // }
+        // }
+
+        private void UpdateList ()
+        {
+            _listProducts.Items.Clear();
+
+            foreach (var product in _database.GetAll())
+                _listProducts.Items.Add(product);
+        }
+
+        private Product GetSelectedProduct()
+        {
+            return _listProducts.SelectedItem as Product;
+        }
 
         private void OnFileExit( object sender, EventArgs e )
         {
@@ -57,7 +73,7 @@ namespace Nile.Windows
                 return;
 
             //TODO: Save product
-           // _database.Add = child.Product;
+            _database.Add = child.Product;
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -66,10 +82,16 @@ namespace Nile.Windows
             //var index = FindFirstProduct();
             //if (index < 0)
             // {
-            //    MessageBox.Show("No products avaialble.");
             //    return;
             //};
-            var product = _database.Get();
+
+            var product = GetSelectedProduct();
+            if (product == null)
+            {
+                MessageBox.Show("No products avaialble.");
+                    return;
+            };
+
             var child = new ProductDetailForm("Product Details");
             child.Product = product;
             if (child.ShowDialog(this) != DialogResult.OK)
@@ -86,7 +108,9 @@ namespace Nile.Windows
             //    return;
 
             // var _product = _products[index];
-            var product = _database.Get();
+            var product = GetSelectedProduct();
+            if (product == null)
+                return;
 
             //Confirm
             if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
