@@ -14,8 +14,7 @@ namespace Nile.Windows
         {
             base.OnLoad(e);
 
-            foreach (var product in _database.GetAll())
-            _listProducts.Items.Add(product);
+            UpdateList();
         }
 
         // private int FindAvailableElement ()
@@ -40,17 +39,17 @@ namespace Nile.Windows
         //    return -1;
         // }
 
+        private Product GetSelectedProduct()
+        {
+            return _listProducts.SelectedItem as Product;
+        }
+
         private void UpdateList ()
         {
             _listProducts.Items.Clear();
 
             foreach (var product in _database.GetAll())
                 _listProducts.Items.Add(product);
-        }
-
-        private Product GetSelectedProduct()
-        {
-            return _listProducts.SelectedItem as Product;
         }
 
         private void OnFileExit( object sender, EventArgs e )
@@ -73,7 +72,8 @@ namespace Nile.Windows
                 return;
 
             //TODO: Save product
-            _database.Add = child.Product;
+            _database.Add(child.Product);
+            UpdateList();
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -98,7 +98,10 @@ namespace Nile.Windows
                 return;
 
             //TODO: Save product
-           // _database.Update = child.Product;
+            // _database.Update = child.Product;
+
+            _database.Update(child.Product);
+            UpdateList();
         }
 
         private void OnProductDelete( object sender, EventArgs e )
@@ -117,8 +120,9 @@ namespace Nile.Windows
                   "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
-            //TODO: Delete product
-            //_database.Remove = null;
+            //Delete product
+            _database.Remove(product.Id);
+            UpdateList();
         }
 
         

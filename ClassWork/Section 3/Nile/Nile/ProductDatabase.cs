@@ -13,8 +13,8 @@ namespace Nile
         public ProductDatabase ()
         {
             var product = new Product();
-            product.Name = "Bike Rack";
-            product.Price = 250;
+            product.Name = "Galaxy S7";
+            product.Price = 650;
             Add(product);
 
             product = new Product();
@@ -24,42 +24,38 @@ namespace Nile
             Add(product);
 
             product = new Product();
-            product.Name = "Apple iPhone X";
-            product.Price = 1150;
+            product.Name = "Windows Phone";
+            product.Price = 100;
             Add(product);
 
             product = new Product();
-            product.Name = "Windows Phone";
-            product.Price = 450;
+            product.Name = "iPhone X";
+            product.Price = 1900;
             product.IsDiscontinued = true;
             Add(product);
         }
-        /// <summary>
-        /// Adds a product.</summary>
+        /// <summary>Adds a product.</summary>
         /// <param name="product">The product to add.</param>
         /// <returns>The added product.</returns>
         public Product Add (Product product)
         {
             if (product == null)
                 return null;
-            product.Validate();
+            if (!String.IsNullOrEmpty(product.Validate()))
+                return null;
 
             //Emulate database by storing copy
             var newProduct = CopyProduct(product);
             _products.Add(newProduct);
             newProduct.Id = _nextId++;
-
-            return CopyProduct(product);
+            return CopyProduct(newProduct);
 
             //var item = _list[0];
-
             //TODO: Implement Add 
             //return product;
         }
 
-        /// <summary>
-        /// Get a specific product.
-        /// </summary>
+        /// <summary>Get a specific product.</summary>
         /// <returns>The product, if it exists.</returns>
         public Product Get ( int id )
         {
@@ -70,8 +66,7 @@ namespace Nile
             return (product != null) ? CopyProduct(product) : null;
         }
 
-        /// <summary>
-        /// Gets all products.</summary>
+        /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>
         public Product[] GetAll ()
         {
@@ -101,8 +96,7 @@ namespace Nile
            // return items;
         }
 
-        /// <summary>
-        /// Removes the product.</summary>
+        /// <summary>Removes the product.</summary>
         /// <param name="product">The product to remove.</param>
         public void Remove (int id)
         {
@@ -115,8 +109,7 @@ namespace Nile
                 
         }
 
-        /// <summary>
-        /// Updates a product.</summary>
+        /// <summary>Updates a product.</summary>
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
         public Product Update (Product product)
@@ -161,6 +154,8 @@ namespace Nile
                 if (product.Id == id)
                     return product;
             };
+
+            return null;
 
         }
 

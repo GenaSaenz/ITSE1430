@@ -13,11 +13,13 @@ namespace Nile
     /// </remarks>
     public class Product
     {
-        //Cros field initialization
         public Product ()
         {
             //Cross field initialization
         }
+
+        /// <summary>Gets or sets the unique identifier.</summary>
+        public int Id { get; set; }
 
         /// <summary>Gets or Sets the name.</summary>
         /// <value>Never returns null.</value>
@@ -100,19 +102,9 @@ namespace Nile
             return null;
         }
 
-
-       // public int ICanOnlySetIt { get; private set; }
-       // public int ICanOnlySetIt2 { get; }
-
-
-        
-        
         private string _name;
         private string _description;
 
-
         //private readonly double _sumValueICannontChange = 10;
-
-
     }
 }
