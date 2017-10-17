@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Nile
 {
    
     /// <summary>Represents a product.</summary>
-    /// <remarks>
-    /// This will represent a product with other stuff.
-    /// </remarks>
-    public class Product
+    /// <remarks>This will represent a product with other stuff.</remarks>
+    public class Product : IValidatableObject
     {
         public Product ()
         {
@@ -86,25 +85,47 @@ namespace Nile
 
         public int[] _sizes = new int[4];
 
+
         /// <summary>
         /// Validates the object.</summary>
         ///<returns>The error message or null.</returns>
-        public virtual string Validate()
+      //public virtual string Validate()
+      //{
+      //    var errors = new List<ValidationResult>();
+      //
+      //    //Name cannot be empty
+      //    if (String.IsNullOrEmpty(Name))
+      //        return "Name cannot be empty.";
+      //
+      //    //Price >= 0
+      //    if (Price < 0)
+      //        return "Price must be >= 0.";
+      //
+      //    return null;
+      //}
+
+        public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
         {
             //Name cannot be empty
             if (String.IsNullOrEmpty(Name))
-                return "Name cannot be empty.";
+               yield return new ValidationResult("Name cannont be empty.", new [] { nameof(Name) });
+                //errors.Add(new ValidationResult("Name cannot be empty.", new[] { nameof(Name) }));
 
             //Price >= 0
             if (Price < 0)
-                return "Price must be >= 0.";
+                yield return new ValidationResult("Price must be >= 0", new[] { nameof(Name) });
+            //errors.Add(new ValidationResult("Price must be >= 0", new[] { nameof(Name)}));
 
-            return null;
+           //return errors;
         }
-
-        private string _name;
+        
+    private string _name;
         private string _description;
 
-        //private readonly double _sumValueICannontChange = 10;
+    public class IValidatableObject
+    {
     }
+
+    //private readonly double _sumValueICannontChange = 10;
+}
 }
