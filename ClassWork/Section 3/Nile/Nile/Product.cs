@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,7 +114,7 @@ namespace Nile
 
             //Price >= 0
             if (Price < 0)
-                yield return new ValidationResult("Price must be >= 0", new[] { nameof(Name) });
+                yield return new ValidationResult("Price must be >= 0", new[] { nameof(Price) });
             //errors.Add(new ValidationResult("Price must be >= 0", new[] { nameof(Name)}));
 
            //return errors;
@@ -122,9 +123,7 @@ namespace Nile
     private string _name;
         private string _description;
 
-    public class IValidatableObject
-    {
-    }
+
 
     //private readonly double _sumValueICannontChange = 10;
 }

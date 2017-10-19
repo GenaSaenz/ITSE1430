@@ -85,11 +85,11 @@ namespace Nile
             };
 
             //Add validation
-            var error = product.Validate();
+           // var error = product.Validate();
             if (!ObjectValidator.TryValidate(product, out var errors))
             {
                 //Show the error
-                ShowError(error, "Validation Error");
+                ShowError("Not Error", "Validation Error");
                 return;
             };
 
