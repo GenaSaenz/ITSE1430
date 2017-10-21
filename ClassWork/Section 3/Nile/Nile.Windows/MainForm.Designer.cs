@@ -87,31 +87,33 @@
             // _miProductAdd
             // 
             this._miProductAdd.Name = "_miProductAdd";
-            this._miProductAdd.Size = new System.Drawing.Size(107, 22);
+            this._miProductAdd.ShortcutKeys = System.Windows.Forms.Keys.Insert;
+            this._miProductAdd.Size = new System.Drawing.Size(152, 22);
             this._miProductAdd.Text = "Add";
             this._miProductAdd.Click += new System.EventHandler(this.OnProductAdd);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // _miProductEdit
             // 
             this._miProductEdit.Name = "_miProductEdit";
-            this._miProductEdit.Size = new System.Drawing.Size(107, 22);
+            this._miProductEdit.Size = new System.Drawing.Size(152, 22);
             this._miProductEdit.Text = "Edit";
             this._miProductEdit.Click += new System.EventHandler(this.OnProductEdit);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // _miProductDelete
             // 
             this._miProductDelete.Name = "_miProductDelete";
-            this._miProductDelete.Size = new System.Drawing.Size(107, 22);
+            this._miProductDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this._miProductDelete.Size = new System.Drawing.Size(152, 22);
             this._miProductDelete.Text = "Delete";
             this._miProductDelete.Click += new System.EventHandler(this.OnProductDelete);
             // 

@@ -13,6 +13,7 @@ namespace Nile
     /// <remarks>This will represent a product with other stuff.</remarks>
     public class Product : IValidatableObject
     {
+        //Don't need this constructor
         public Product ()
         {
             //Cross field initialization
@@ -121,7 +122,7 @@ namespace Nile
         }
         
     private string _name;
-        private string _description;
+    private string _description;
 
 
 

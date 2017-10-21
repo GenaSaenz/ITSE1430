@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nile
 {
-    /// <summary>
-    /// Validate objects.</summary>
+    /// <summary>Validate objects.</summary>
     public class ObjectValidator
     {
         public static bool TryValidate ( IValidatableObject value,  out IEnumerable<ValidationResult> errors)
