@@ -13,12 +13,6 @@ namespace Nile
     /// <remarks>This will represent a product with other stuff.</remarks>
     public class Product : IValidatableObject
     {
-        //Don't need this constructor
-        public Product ()
-        {
-            //Cross field initialization
-        }
-
         /// <summary>Gets or sets the unique identifier.</summary>
         public int Id { get; set; }
 
@@ -26,17 +20,9 @@ namespace Nile
         /// <value>Never returns null.</value>
         public string Name
         {
-            //string get_Name()
-            get 
-            {
-                return _name ?? "";
-            }
+            get { return _name ?? ""; }
 
-            //void set_Name(string value)
-            set 
-            {
-                _name = value?.Trim();
-            }
+            set { _name = value?.Trim(); }
         }
 
         /// <summary>Gets or sets the description.</summary>
@@ -74,18 +60,18 @@ namespace Nile
         }
 
         //Size of the product
-        public int[] Sizes
-        {
-            get
-            {
-                var copySizes = new int[_sizes.Length];
-                Array.Copy(_sizes, copySizes, _sizes.Length);
+        //public int[] Sizes
+        //{
+        //    get
+        //    {
+        //        var copySizes = new int[_sizes.Length];
+        //        Array.Copy(_sizes, copySizes, _sizes.Length);
 
-                return copySizes;
-            }
-         }
+        //        return copySizes;
+        //    }
+        // }
 
-        public int[] _sizes = new int[4];
+        //public int[] _sizes = new int[4];
 
 
         /// <summary>
@@ -124,8 +110,5 @@ namespace Nile
     private string _name;
     private string _description;
 
-
-
-    //private readonly double _sumValueICannontChange = 10;
-}
+  }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Nile.Windows
@@ -13,6 +14,8 @@ namespace Nile.Windows
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
+
+            _gridProducts.AutoGenerateColumns = false;
 
             UpdateList();
         }
@@ -41,15 +44,17 @@ namespace Nile.Windows
 
         private Product GetSelectedProduct()
         {
-            return _listProducts.SelectedItem as Product;
+            //return _listProducts.SelectedItem as Product;
+            return null;
         }
 
         private void UpdateList ()
         {
-            _listProducts.Items.Clear();
+            //_listProducts.Items.Clear();
+            //foreach (var product in _database.GetAll())
+            //    _listProducts.Items.Add(product);
 
-            foreach (var product in _database.GetAll())
-                _listProducts.Items.Add(product);
+            _gridProducts.DataSource = _database.GetAll().ToList();  
         }
 
         private void OnFileExit( object sender, EventArgs e )
@@ -59,14 +64,6 @@ namespace Nile.Windows
 
         private void OnProductAdd( object sender, EventArgs e )
         {
-            //Make sure there is room left
-           // var index = FindAvailableElement();
-           // if (index < 0)
-           // {
-           //     MessageBox.Show("No more products available.");
-           //     return;
-           // };
-
             var child = new ProductDetailForm("Product Details");
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
@@ -78,13 +75,6 @@ namespace Nile.Windows
 
         private void OnProductEdit( object sender, EventArgs e )
         {
-            //Are there any products?
-            //var index = FindFirstProduct();
-            //if (index < 0)
-            // {
-            //    return;
-            //};
-
             var product = GetSelectedProduct();
             if (product == null)
             {
@@ -97,20 +87,12 @@ namespace Nile.Windows
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            //TODO: Save product
-            // _database.Update = child.Product;
-
             _database.Update(child.Product);
             UpdateList();
         }
 
         private void OnProductDelete( object sender, EventArgs e )
         {
-            //var index = FindFirstProduct();
-            //if (index < 0)
-            //    return;
-
-            // var _product = _products[index];
             var product = GetSelectedProduct();
             if (product == null)
                 return;
@@ -134,7 +116,7 @@ namespace Nile.Windows
         }
 
        // private Product[] _products = new Product[100];
-        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        private IProductDatabase _database = new Nile.Stores.SeedMemoryProductDatabase();
 
     }
 }
