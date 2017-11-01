@@ -111,8 +111,8 @@ namespace MovieLib
 
             };
 
-            if (MessageBox.Show(this, "Are you sure?", "Closing", MessageBoxButtons.YesNo) == DialogResult.No)
-                e.Cancel = true;
+            //if (MessageBox.Show(this, "Are you sure?", "Closing", MessageBoxButtons.YesNo) == DialogResult.No)
+            //    e.Cancel = true;
         }
 
         private void MovieDetailsForm_FormClosed( object sender, FormClosedEventArgs e )
