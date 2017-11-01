@@ -8,19 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Nile
+namespace Nile.Windows
 {
     public partial class ProductDetailForm : Form
     {
-        //Constructor Chaining
-        #region Construction  
-        public ProductDetailForm() //: base()
+        #region Construction
+
+        public ProductDetailForm () //: base()
         {
-            InitializeComponent();
-
+            InitializeComponent();            
         }
-
-        public ProductDetailForm(string title ) : this()
+        
+        public ProductDetailForm ( string title ) : this()
         {
             Text = title;
         }
@@ -31,24 +30,22 @@ namespace Nile
         }
         #endregion
 
-
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
-        
-        
+
             if (Product != null)
             {
                 _txtName.Text = Product.Name;
                 _txtDescription.Text = Product.Description;
                 _txtPrice.Text = Product.Price.ToString();
-                _ckbxDiscontinued.Checked = Product.IsDiscontinued;
+                _chkDiscontinued.Checked = Product.IsDiscontinued;
             };
 
             ValidateChildren();
         }
 
-        /// <summary>Gets or Sets the product being shown.</summary>
+        /// <summary>Gets or sets the product being shown.</summary>
         public Product Product { get; set; }
 
         private void OnCancel( object sender, EventArgs e )
@@ -56,11 +53,12 @@ namespace Nile
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        private void ShowError (string message, string title)
+        
+        private void ShowError ( string message, string title )
         {
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
         private void OnSave( object sender, EventArgs e )
         {
             if (!ValidateChildren())
@@ -69,11 +67,11 @@ namespace Nile
             };
 
             //var product = new Product();
-            // product.Id = Product?.Id ?? 0;
-            // product.Name = _txtName.Text;
-            // product.Description = _txtDescription.Text;
-            // product.Price = GetPrice(_txtPrice);
-            // product.IsDiscontinued = _ckbxDiscontinued.Checked;
+            //product.Id = Product?.Id ?? 0;
+            //product.Name = _txtName.Text;
+            //product.Description = _txtDescription.Text;
+            //product.Price = GetPrice(_txtPrice);
+            //product.IsDiscontinued = _chkDiscontinued.Checked;
 
             //Object initializer syntax
             var product = new Product() {
@@ -81,15 +79,20 @@ namespace Nile
                 Name = _txtName.Text,
                 Description = _txtDescription.Text,
                 Price = GetPrice(_txtPrice),
-                IsDiscontinued = _ckbxDiscontinued.Checked,
+                IsDiscontinued = _chkDiscontinued.Checked,
             };
 
+            //System.ComponentModel.DataAnnotations.IValidatableObject vo = product;
+            //vo.
+
             //Add validation
-           // var error = product.Validate();
-            if (!ObjectValidator.TryValidate(product, out var errors))
+            //var error = product.Validate();
+            //if (!String.IsNullOrEmpty(error))
+            //Using IValidatableObject
+            if (!ObjectValidator.TryValidate(product, out var errors))                
             {
                 //Show the error
-                ShowError("Not Error", "Validation Error");
+                ShowError("Not valid", "Validation Error");
                 return;
             };
 
@@ -98,43 +101,15 @@ namespace Nile
             Close();
         }
 
-        private decimal GetPrice(TextBox control)
+        private decimal GetPrice ( TextBox control )
         {
             if (Decimal.TryParse(control.Text, out decimal price))
                 return price;
-            //TODO: Validate price
+
+            //Validate price            
             return -1;
         }
-
-        private void ProductDetailForm_FormClosing( object sender, FormClosingEventArgs e )
-        {
-            //Please NO
-            //var form = (Form)sender;
-
-            //Please yes
-            var form = sender as Form;
-
-            //Casting for value types
-            if (sender is int)
-            {
-                var intValue2 = (int)sender;
-            };
-
-            //Pattern matching
-            if (sender is int intValue)
-            {
-
-            };
-
-            if (MessageBox.Show(this, "Are you sure?", "Closing", MessageBoxButtons.YesNo) == DialogResult.No)
-                e.Cancel = true;
-        }
-
-        private void ProductDetailForm_FormClosed( object sender, FormClosedEventArgs e )
-        {
-
-        }
-
+        
         private void OnValidatingPrice( object sender, CancelEventArgs e )
         {
             var tb = sender as TextBox;
@@ -151,7 +126,7 @@ namespace Nile
         {
             var tb = sender as TextBox;
             if (String.IsNullOrEmpty(tb.Text))
-                _errors.SetError(tb, "Name is required.");
+                _errors.SetError(tb, "Name is required");
             else
                 _errors.SetError(tb, "");
         }

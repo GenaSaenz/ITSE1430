@@ -15,18 +15,12 @@ namespace Nile.Windows
         static void Main()
         {
             //String Split example
-           // var csv = "Field1 | Field2 ,, Field3 | Field4";
-           // var delimeters = new char[2];
-            //delimeters[0] = '|';
-            //delimeters[1] = ',';
-           // var tokens = csv.Split(delimeters, StringSplitOptions.RemoveEmptyEntries);
-           // var numberOfElements = tokens.Length;
-            
-           /* var product = new Product();
-           // product.Name = "Product A";
-            var price = product.DiscountedPrice;
-            var name = product.Name;
-            */
+            //var csv = "Field1 | Field2 ,, Field3 | Field4";
+            //var delimiters = new char[2];
+            //delimiters[0] = '|';
+            //delimiters[1] = ',';
+            //var tokens = csv.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            //var numberOfElements = tokens.Length;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

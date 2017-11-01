@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Nile.Stores
     /// <summary>Base class for product database.</summary>
     public class SeedMemoryProductDatabase : MemoryProductDatabase
     {
-        public SeedMemoryProductDatabase()
+        public SeedMemoryProductDatabase ()
         {
             #region Other approaches
             //Long way

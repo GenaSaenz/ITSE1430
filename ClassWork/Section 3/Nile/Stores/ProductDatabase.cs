@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,11 @@ namespace Nile.Stores
 {
     /// <summary>Base class for product database.</summary>
     public abstract class ProductDatabase : IProductDatabase
-    {
+    {        
         /// <summary>Adds a product.</summary>
         /// <param name="product">The product to add.</param>
         /// <returns>The added product.</returns>
-        public Product Add( Product product )
+        public Product Add ( Product product )
         {
             //TODO: Validate
             if (product == null)
@@ -35,7 +36,7 @@ namespace Nile.Stores
 
         /// <summary>Get a specific product.</summary>
         /// <returns>The product, if it exists.</returns>
-        public Product Get( int id )
+        public Product Get ( int id )
         {
             //TODO: Validate
             if (id <= 0)
@@ -43,10 +44,10 @@ namespace Nile.Stores
 
             return GetCore(id);
         }
-
+        
         /// <summary>Gets all products.</summary>
         /// <returns>The products.</returns>
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll ()
         {
             return GetAllCore();
 
@@ -73,10 +74,10 @@ namespace Nile.Stores
             //return items;
             #endregion
         }
-
+        
         /// <summary>Removes the product.</summary>
         /// <param name="id">The product to remove.</param>
-        public void Remove( int id )
+        public void Remove ( int id )
         {
             //TODO: Validate
             if (id <= 0)
@@ -90,11 +91,11 @@ namespace Nile.Stores
             //    break;
             //};        
         }
-
+        
         /// <summary>Updates a product.</summary>
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
-        public Product Update( Product product )
+        public Product Update ( Product product )
         {
             //TODO: Validate
             if (product == null)
