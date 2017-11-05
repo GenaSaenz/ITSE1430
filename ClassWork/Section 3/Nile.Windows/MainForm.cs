@@ -57,13 +57,14 @@ namespace Nile.Windows
 
         private void UpdateList ()
         {
+            _bsProducts.DataSource = _database.GetAll().ToList();
+
             //_listProducts.Items.Clear();
             //foreach (var product in _database.GetAll())
             //    _listProducts.Items.Add(product);
 
             //new BindingList<Product>();
 
-            _bsProducts.DataSource = _database.GetAll().ToList();
             //_products.Clear();
             //_products.AddRange(_database.GetAll());
 
