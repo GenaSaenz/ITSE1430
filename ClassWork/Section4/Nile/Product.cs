@@ -36,7 +36,7 @@ namespace Nile
         //    get => 0M;
         //}
 
-        public decimal CalculatedProperty => 0M;
+        //public decimal CalculatedProperty => 0M;
 
         /// <summary>Gets or sets the price.</summary>
         public decimal Price { get; set; } = 0;      

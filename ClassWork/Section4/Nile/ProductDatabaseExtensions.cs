@@ -5,18 +5,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nile.Stores
+namespace Nile
 {
-    /// <summary>Provides a <see cref="MemoryProductDatabase"/> with products already added.</summary>
+    /// <summary>Provides a <see cref="IProductDatabase"/> with products already added.</summary>
     public static class ProductDatabaseExtensions
     {
+        /// <summary>Get a product by name.</summary>
+        /// <param name="source">The source.</param>
+        /// <param name="name">The product name.</param>
+        /// <returns>The product, if found.</returns>
         public static Product GetByName ( this IProductDatabase source, string name )
         {
-            foreach (var item in source GetAll())
+            foreach (var item in source.GetAll())
             {
                 if (String.Compare(item.Name, name, true) == 0)
                     return item;
-            }
+            };
 
             return null;
         }
@@ -52,7 +56,8 @@ namespace Nile.Stores
         //    public decimal AdjustedPrice { get; set; }
         //}
 
-        /// <summary>Initializes an instance of the <see cref="SeedMemoryProductDatabase"/> class.</summary>
+        /// <summary>Adds seed data to a database.</summary>
+        /// <param name="source">The data to seed.</param>
         public static void WithSeedData ( this IProductDatabase source )
         {
             source.Add(new Product() { Name = "Galaxy S7", Price = 650 });
