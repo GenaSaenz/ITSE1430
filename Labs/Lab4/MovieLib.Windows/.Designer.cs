@@ -95,29 +95,32 @@
             // miMoviesAdd
             // 
             this.miMoviesAdd.Name = "miMoviesAdd";
-            this.miMoviesAdd.Size = new System.Drawing.Size(107, 22);
+            this.miMoviesAdd.Size = new System.Drawing.Size(131, 22);
             this.miMoviesAdd.Text = "Add";
+            this.miMoviesAdd.Click += new System.EventHandler(this.OnMovieAdd);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(128, 6);
             // 
             // miMoviesEdit
             // 
             this.miMoviesEdit.Name = "miMoviesEdit";
-            this.miMoviesEdit.Size = new System.Drawing.Size(107, 22);
+            this.miMoviesEdit.Size = new System.Drawing.Size(131, 22);
             this.miMoviesEdit.Text = "Edit";
+            this.miMoviesEdit.Click += new System.EventHandler(this.OnMovieEdit);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(128, 6);
             // 
             // miMoviesDelete
             // 
             this.miMoviesDelete.Name = "miMoviesDelete";
-            this.miMoviesDelete.Size = new System.Drawing.Size(107, 22);
+            this.miMoviesDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.miMoviesDelete.Size = new System.Drawing.Size(131, 22);
             this.miMoviesDelete.Text = "Delete";
             // 
             // toolStripMenuItem3
@@ -172,7 +175,6 @@
             // 
             this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
             this.titleDataGridViewTextBoxColumn.FillWeight = 200F;
-            this.titleDataGridViewTextBoxColumn.Frozen = true;
             this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
             this.titleDataGridViewTextBoxColumn.MinimumWidth = 100;
             this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
@@ -228,6 +230,7 @@
             this.Controls.Add(this._gridMovies);
             this.Controls.Add(this._mfMainMenu);
             this.MainMenuStrip = this._mfMainMenu;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Movie Library";
             this._mfMainMenu.ResumeLayout(false);

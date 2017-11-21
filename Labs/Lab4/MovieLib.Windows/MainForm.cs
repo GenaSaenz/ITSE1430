@@ -51,23 +51,20 @@ namespace MovieLib.Windows
             UpdateList();
         }
 
-        private void OnMovieDelete( object sender, EventArgs e )
-        {
-            var movie = GetSelectedMovie();
-            if (movie == null)
-                return;
-
-            DeleteMovie(movie);
-        }
+ 
 
         private void OnMovieEdit( object sender, EventArgs e )
         {
             var movie = GetSelectedMovie();
             if (movie == null)
             {
-                MessageBox.Show("No movies are available.");
+                if (_database.GetAll().Count() == 0)
+                    MessageBox.Show("No movies are available.");
+                else
+                    MessageBox.Show("No movie selected.");
+
                 return;
-            };
+            }
 
             EditMovie(movie);
         }
@@ -137,7 +134,7 @@ namespace MovieLib.Windows
             };
         }
 
-        private void EditMovie (Movie movie)
+        private void EditMovie ( Movie movie ) 
         {
             var child = new MovieDetailsForm("Movie Details");
             child.Movie = movie;

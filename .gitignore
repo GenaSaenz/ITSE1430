@@ -251,3 +251,4 @@ paket-files/
 .idea/
 *.sln.iml
 /ClassWork/Section5/NileDatabase/NileDatabase.jfm
+/Labs/Lab4/MovieDatabase/MovieDatabase.jfm

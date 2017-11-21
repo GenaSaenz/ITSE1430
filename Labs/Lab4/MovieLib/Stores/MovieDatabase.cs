@@ -4,9 +4,11 @@ Lab 4 */
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MovieLib.Stores
 {
@@ -17,7 +19,7 @@ namespace MovieLib.Stores
         /// <returns>The added movie.</returns>
         public Movie Add( Movie movie )
         {
-            //TODO: Validate
+            //Validate
             if (movie == null)
                 return null;
 
@@ -25,8 +27,18 @@ namespace MovieLib.Stores
             if (!ObjectValidator.TryValidate(movie, out var errors))
                 return null;
 
-            //Emulate database by storing copy
-            return AddCore(movie);
+            ///<summary>Duplicate Movie Title Exception</summary>
+            if (movie.Title = DuplicateMovieTitle)
+            {   try
+                {
+                    throw new FormatException("Duplicate Title");
+                }catch (DuplicateNameException ex)
+                {
+                   MessageBox.Show("A movie with this title already exists.");
+                }
+            }
+                //Emulate database by storing copy
+                return AddCore(movie);
         }
 
         /// <summary>Get a specific movie.</summary>
@@ -51,7 +63,6 @@ namespace MovieLib.Stores
         /// <param name="id">The movie to remove.</param>
         public void Remove( int id )
         {
-            //TODO: Validate
             if (id <= 0)
                 return;
 
@@ -71,12 +82,24 @@ namespace MovieLib.Stores
             if (!ObjectValidator.TryValidate(movie, out var errors))
                 return null;
 
-            //Get existing product
+            //Get existing movie
             var existing = GetCore(movie.Id);
             if (existing == null)
                 return null;
 
             return UpdateCore(existing, movie);
+        }
+
+        public string DuplicateMovieTitle( string title )
+        {
+            var existingTitle = (from movies in _database.GetAll()
+                                 where movies.Title.ToUpper() == title.ToUpper()
+                                 select movies).FirstOrDefault();
+
+            if (existingTitle != null)
+                return "Duplicate Title";
+
+            return "";
         }
 
         #region Protected Members
@@ -90,7 +113,10 @@ namespace MovieLib.Stores
         protected abstract Movie UpdateCore( Movie existing, Movie newItem );
 
         protected abstract Movie AddCore( Movie product );
-        #endregion
+#endregion
+
+
+private IMovieDatabase _database;
     }
 }
 
