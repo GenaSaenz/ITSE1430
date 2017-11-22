@@ -21,24 +21,24 @@ namespace MovieLib.Stores
         {
             //Validate
             if (movie == null)
-                return null;
+            {
+                throw new NullReferenceException("Movie cannot be empty.");
+            };
 
             //Using IValidatableObject
             if (!ObjectValidator.TryValidate(movie, out var errors))
                 return null;
 
-            ///<summary>Duplicate Movie Title Exception</summary>
-            if (movie.Title = DuplicateMovieTitle)
-            {   try
+            ///<summary>Throws an exception if title is a duplicate title when adding new movie.</summary>
+            foreach (var tempMovie in GetAllCore())
+            {
+                if (tempMovie.Title == movie.Title)
                 {
-                    throw new FormatException("Duplicate Title");
-                }catch (DuplicateNameException ex)
-                {
-                   MessageBox.Show("A movie with this title already exists.");
+                    throw new DuplicateNameException("Movie title already exists.");
                 }
             }
-                //Emulate database by storing copy
-                return AddCore(movie);
+
+            return AddCore(movie);
         }
 
         /// <summary>Get a specific movie.</summary>
@@ -47,7 +47,9 @@ namespace MovieLib.Stores
         {
             //TODO: Validate
             if (id <= 0)
-                return null;
+            {
+                throw new NullReferenceException("Id must be greater than 0.");
+            }
 
             return GetCore(id);
         }
@@ -74,7 +76,6 @@ namespace MovieLib.Stores
         /// <returns>The updated movie.</returns>
         public Movie Update( Movie movie )
         {
-            //TODO: Validate
             if (movie == null)
                 return null;
 
@@ -86,20 +87,13 @@ namespace MovieLib.Stores
             var existing = GetCore(movie.Id);
             if (existing == null)
                 return null;
+            foreach (var tempMovie in GetAllCore())
+                if (tempMovie.Title == movie.Title && tempMovie.Description != movie.Description )
+            {
+                    throw new DuplicateNameException("Movie title already exists.");
+            };
 
             return UpdateCore(existing, movie);
-        }
-
-        public string DuplicateMovieTitle( string title )
-        {
-            var existingTitle = (from movies in _database.GetAll()
-                                 where movies.Title.ToUpper() == title.ToUpper()
-                                 select movies).FirstOrDefault();
-
-            if (existingTitle != null)
-                return "Duplicate Title";
-
-            return "";
         }
 
         #region Protected Members
@@ -115,8 +109,6 @@ namespace MovieLib.Stores
         protected abstract Movie AddCore( Movie product );
 #endregion
 
-
-private IMovieDatabase _database;
     }
 }
 

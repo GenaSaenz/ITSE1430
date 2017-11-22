@@ -69,6 +69,15 @@ namespace MovieLib.Windows
             EditMovie(movie);
         }
 
+        private void OnMoviesDelete( object sender, EventArgs e )
+        {
+            var movie = GetSelectedMovie();
+            if (movie == null)
+                return;
+
+            DeleteMovie(movie);
+        }
+
         private void OnHelpAbout( object sender, EventArgs e )
         {
             var about = new AboutBox();
