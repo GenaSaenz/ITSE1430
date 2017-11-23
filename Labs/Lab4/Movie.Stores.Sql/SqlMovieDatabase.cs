@@ -26,7 +26,7 @@ namespace MovieLib.Stores.Sql
         private readonly string _connectionString;
         #endregion
 
-        protected override Movie AddCore( Movie product )
+        protected override Movie AddCore( Movie movie )
         {
             var id = 0;
             using (var conn = OpenDatabase())
@@ -34,10 +34,10 @@ namespace MovieLib.Stores.Sql
                 var cmd = new SqlCommand("AddMovie", conn) 
                 { CommandType = CommandType.StoredProcedure };
 
-                cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = product.Title;
-                cmd.Parameters.AddWithValue("@description", product.Description);
-                cmd.Parameters.AddWithValue("@length", product.Length);
-                cmd.Parameters.AddWithValue("@isOwned", product.IsOwned);
+                cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = movie.Title;
+                cmd.Parameters.AddWithValue("@description", movie.Description);
+                cmd.Parameters.AddWithValue("@length", movie.Length);
+                cmd.Parameters.AddWithValue("@isOwned", movie.IsOwned);
 
                 id = Convert.ToInt32(cmd.ExecuteScalar());
             };
@@ -114,7 +114,7 @@ namespace MovieLib.Stores.Sql
             using (var conn = OpenDatabase())
             {                
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "RemoveProduct";
+                cmd.CommandText = "RemoveMovie";
                 cmd.CommandType = CommandType.StoredProcedure;
             };
         }
