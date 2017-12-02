@@ -58,7 +58,7 @@ namespace Nile.Web.Controllers
         private static IProductDatabase GetDatabase()
         {
             var connstring = ConfigurationManager.ConnectionStrings["ProductDatabase"];
-            return new SqlProductDatabase(connstring.ConnectionStrings);
+            return new SqlProductDatabase(connstring.ConnectionString);
         }
 
         private readonly IProductDatabase _database;
