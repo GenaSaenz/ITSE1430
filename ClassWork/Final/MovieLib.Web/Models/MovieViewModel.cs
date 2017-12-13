@@ -22,12 +22,13 @@ namespace MovieLib.Web.Models
         [Display(Name = "Is Owned")]
         public bool IsOwned { get; set; }
 
-        [Range(0, Int32.MaxValue)]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Length must be > 0 minutes.")]
         public int Length { get; set; }
 
         public Rating Rating { get; set; }
 
         [Display(Name = "Release Year")]
+        [Range(1900, 2100, ErrorMessage = "Release Year must be between 1900 and 2100.")]
         public int ReleaseYear { get; set; }
 
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext ) => Enumerable.Empty<ValidationResult>();        
