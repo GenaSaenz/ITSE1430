@@ -1,6 +1,6 @@
-﻿/*
+﻿/*Gena (Annie) Saenz
  * ITSE 1430
- * Sample implementation
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;

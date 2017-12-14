@@ -1,5 +1,6 @@
-﻿/*
+﻿/*Gena (Annie) Saenz
  * ITSE 1430
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace MovieLib.Data
             if (existing != null)
                 throw new ArgumentException("Movie with same title already exists.", nameof(movie));
 
+
             //Create the new movie
             return AddCore(movie);
         }
@@ -46,7 +48,7 @@ namespace MovieLib.Data
 
         /// <summary>Gets all the movies.</summary>
         /// <returns>The list of movies.</returns>
-        public IEnumerable<Movie> GetAll ()
+        public IEnumerable<Movie> GetAll ()     //**CR0 - Corrected from Getall() to GetAll()
         {
             return GetAllCore();
         }
@@ -64,7 +66,7 @@ namespace MovieLib.Data
                 throw new ArgumentOutOfRangeException(nameof(id), "ID must be > 0.");
 
             var existing = GetCore(id);
-            if (existing == null)
+            if (existing == null)  //**CR3- Corrected from != null to == null
                 return false;
 
             RemoveCore(id);

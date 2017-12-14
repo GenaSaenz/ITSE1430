@@ -1,26 +1,27 @@
-﻿/*
+﻿/*Gena (Annie) Saenz
  * ITSE 1430
+ * Final Exam
  */
 using System;
 
 namespace MovieLib
 {
     /// <summary>Provides the different types of movie ratings.</summary>
-    public enum Rating
+    public enum Rating  //**CR1 - I do not understand how to work with enums enough to fix this unpersistent Rating 
     {
         /// <summary>Unknown or unspecified rating.</summary>
-        Unspecified,
+        Unspecified = 0,
 
         /// <summary>General Audience.</summary>
-        G,
+        G = 1,
 
         /// <summary>Parental Guidance suggested.</summary>
-        PG,
+        PG = 2,
 
         /// <summary>Parental Guidance suggested for those under 13.</summary>
-        PG13,
+        PG13 = 3,
 
         /// <summary>Restricted</summary>
-        R,
+        R = 4,
     }
 }

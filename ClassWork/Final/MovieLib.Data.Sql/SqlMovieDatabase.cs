@@ -1,5 +1,6 @@
-﻿/*
- * ITSE1439
+﻿/*Gena (Annie) Saenz
+ * ITSE 1430
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;
@@ -75,7 +76,7 @@ namespace MovieLib.Data.Sql
 
         /// <summary>Gets all the movies.</summary>
         /// <returns>The list of movies.</returns>
-        protected override IEnumerable<Movie> GetAllCore ()
+        protected override IEnumerable<Movie> GetAllCore ()   //**CR5 - Tried adding an Order By Title ASC but... nope
         {
             using (var conn = new SqlConnection(_connectionString))
             {

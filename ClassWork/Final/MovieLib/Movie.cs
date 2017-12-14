@@ -1,6 +1,6 @@
-﻿/*
+﻿/*Gena (Annie) Saenz
  * ITSE 1430
- * Sample implementation
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;
@@ -30,10 +30,12 @@ namespace MovieLib
         /// <summary>Gets or sets the movie rating.</summary>
         public Rating Rating { get; set; }
 
+
         public int ReleaseYear { get; set; }
 
-        /// <summary>Gets or sets the title.</summary>
-        public string Title
+
+/// <summary>Gets or sets the title.</summary>
+public string Title
         {
             get { return _title ?? ""; }
             set { _title = value; }
@@ -48,14 +50,22 @@ namespace MovieLib
             if (Title.Length == 0)
                 yield return new ValidationResult("Title is required.", new[] { "Title" });
 
+            //Title must be between 2 and 100 characters       **CR4 - Movie name between 2 and 100 characters
+            if (Title.Length < 2 || Title.Length > 100)
+                yield return new ValidationResult("Title must be between 2 and 100 characters.", new[] { "Title" });
+
             //Length must be >= 0.
             if (Length < 0)
                 yield return new ValidationResult("Length must be >= 0.", new[] { "Length" });
+
+            //Release year must be between 1900 and 2100      **CR2 - Release year between 1900 and 2100
+            if (ReleaseYear < 1900 || ReleaseYear > 2100)
+                yield return new ValidationResult("Release year must be between the years of 1900 and 2100.", new[] { "ReleaseYear" });
         }
 
         #region Private Members
 
-        private string _title, _description;        
+        private string _title, _description;       
 
         #endregion
     }

@@ -1,6 +1,6 @@
-﻿/*
+﻿/*Gena (Annie) Saenz
  * ITSE 1430
- * Sample implementation
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;
@@ -25,10 +25,11 @@ namespace MovieLib.Web.Models
         [Range(0, Int32.MaxValue, ErrorMessage = "Length must be > 0 minutes.")]
         public int Length { get; set; }
 
+        [Range(0, 4)]  //**CR1 - Rating not being persistent
         public Rating Rating { get; set; }
 
         [Display(Name = "Release Year")]
-        [Range(1900, 2100, ErrorMessage = "Release Year must be between 1900 and 2100.")]
+        [Range(1900, 2100, ErrorMessage = "Release Year must be between 1900 and 2100.")]  //**CR2 - Release year limited to years between 1900 and 2100
         public int ReleaseYear { get; set; }
 
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext ) => Enumerable.Empty<ValidationResult>();        

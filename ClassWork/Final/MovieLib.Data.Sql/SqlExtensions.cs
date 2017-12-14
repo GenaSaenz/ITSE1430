@@ -1,5 +1,6 @@
-﻿/*
- * ITSE1430
+﻿/*Gena (Annie) Saenz
+ * ITSE 1430
+ * Final Exam
  */
 using System;
 using System.Collections.Generic;
